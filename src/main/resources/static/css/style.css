@@ -1,0 +1,10 @@
+body {
+  overflow: hidden; /* Hide scrollbars */
+}
+
+.navbar .notification {
+	right: 3px;
+}
+footer.footer {
+    padding: 0;
+}
