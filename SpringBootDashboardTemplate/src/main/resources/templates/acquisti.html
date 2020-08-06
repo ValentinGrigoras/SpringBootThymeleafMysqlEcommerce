@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="base_layout">
+
+<head>
+<meta charset="utf-8" />
+<title>Titolo di prova</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+
+		<div class="container-fluid">
+			<div class="alert alert-success alert-dismissible fade show" th:if="${ok=='true'}"
+				role="alert">
+				<strong>Ordine Effettuato!</strong> Puoi visualizzare l'ordine nella pagina visualizza ordini
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="alert alert-warning alert-dismissible fade show" th:if="${ok == 'false' and empty=='true'}"
+				role="alert">
+				<strong>Nessun articolo nel carello!</strong> Scegli gli articoli da aggiungere dalla seguente lista
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header card-header-primary">
+							<h4 class="card-title ">Articoli disponibili</h4>
+							<p class="card-category">Aggiungi gli articoli desiderati al
+								carrello</p>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead class="text-primary">
+										<tr>
+											<th style="width: 200px;">ID</th>
+											<th style="width: 200px;">Marca</th>
+											<th style="width: 200px;">Modello</th>
+											<th style="width: 200px;">Prezzo</th>
+											<th style="width: 200px;">&nbsp;</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="articolo: ${listaArticoli}">
+											<td th:text="${articolo.idArticolo}"></td>
+											<td th:text="${articolo.marca}"></td>
+											<td th:text="${articolo.modello}"></td>
+											<td th:text="'&euro; ' +${articolo.prezzo}">&euro;</td>
+											<td><a th:href="@{|/add/${articolo.idArticolo}|}"><button
+														type="submit" class="btn btn-primary pull-left btn-sm">
+														<span class="material-icons mr-2">
+															add_shopping_cart </span>Aggiungi al carrello
+														<div class="ripple-container"></div>
+													</button></a></td>
+										</tr>
+									</tbody>
+								</table>
+								<a th:href="@{/carrello}">
+									<button type="submit" class="btn btn-primary pull-left">
+										Carrello
+										<div class="ripple-container"></div>
+									</button>
+								</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
